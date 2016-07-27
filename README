@@ -1,0 +1,33 @@
+This little program calculates how far above the fork crown brake
+bolt a rack deck needs to be set to not foul the front wheel.
+
+usage: deck2bolt HTA(degrees) A-C(mm) RAKE(mm) MIN-CLEARANCE(mm)
+
+(min-clearance is the vertical distance from the axle to the top
+of the wheel + however much room you might want for fender clearance.
+It is probably ridiculous to have it be larger than a-c, but you
+might want to flare the front end of a fender up for some sort of
+aesthetic reason.)
+
+
+Basically, it rotates the min-clearance back to match HTA, then
+tells you min-clearance * ( 1 - cos(hta) ) (min-clearance is rotated
+back to make the hypoteneuse of a right triangle, then I subtract
+the back wall of that triangle {cos(hta)} from original min-clearance
+and what's left is how much above the crown bolt hole the deck needs
+to be to clear the wheel.
+
+This simple calculation is made slightly more complicated by fork
+rake -- a raked fork has an effective hta that's larger than the
+actual hta. That's a simple equation as well;  asin(rake/a-c).
+
+So what this program does is returns
+
+    m-c * ( 1 - cos(hta + asin(rake/a-c)) )
+
+with some stupid sanity checking where it refuses to calculate if
+either a-c or m-c is less than 100mm.   It does NOT sanity check
+for m-c > a-c, so you can go to town with wheels that are much
+larger than the fork will accept.
+
+
