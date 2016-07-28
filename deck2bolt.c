@@ -51,7 +51,7 @@ char **argv;
     
     ehta = hta + asin(rake/a2c);
 
-    deck2bolt = clearance * ( 1 - cos(ehta) );
+    deck2bolt = a2c * ( 1 - cos(ehta) ) + (clearance-a2c);
 
-    printf("deck to brake bolt drop is ~%.0f\n", deck2bolt);
+    printf("deck to brake bolt drop is %.0f\n", deck2bolt < 0 ? 0 : deck2bolt);
 }
