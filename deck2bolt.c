@@ -24,8 +24,8 @@ char **argv;
     float rake;
     float deck2bolt;
     
-    if ( argc != 5 ) {
-	fprintf(stderr, "usage: %s HTA A-C RAKE MIN-CLEARANCE\n",
+    if ( argc < 4 || argc > 5 ) {
+	fprintf(stderr, "usage: %s HTA A-C RAKE [MIN-CLEARANCE]\n",
 			 basename(argv[0]));
 	exit(1);
     }
@@ -33,7 +33,7 @@ char **argv;
     hta      = atof(argv[1]);
     a2c      = atof(argv[2]);
     rake     = atof(argv[3]);
-    clearance= atof(argv[4]);
+    clearance= (argc == 5) ? atof(argv[4]) : hta;
 
     if ( a2c < 100 ) {
 	fprintf(stderr, "%s: axle-to-crown is %.0f?\n",
