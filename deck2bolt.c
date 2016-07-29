@@ -33,7 +33,7 @@ char **argv;
     hta      = atof(argv[1]);
     a2c      = atof(argv[2]);
     rake     = atof(argv[3]);
-    clearance= (argc == 5) ? atof(argv[4]) : hta;
+    clearance= (argc == 5) ? atof(argv[4]) : a2c;
 
     if ( a2c < 100 ) {
 	fprintf(stderr, "%s: axle-to-crown is %.0f?\n",
